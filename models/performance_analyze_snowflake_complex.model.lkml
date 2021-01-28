@@ -34,7 +34,18 @@ explore: income_band {}
 
 explore: inventory {}
 
-explore: item {}
+explore: item {
+  join:  store_returns{
+    type: full_outer
+    relationship: one_to_many
+    sql_on: ${item.i_item_sk} = ${store_returns.sr_item_sk} ;;
+  }
+  join:  store_sales{
+    type: full_outer
+    relationship: one_to_many
+    sql_on: ${item.i_item_sk} = ${store_sales.ss_item_sk};;
+  }
+}
 
 explore: promotion {}
 
