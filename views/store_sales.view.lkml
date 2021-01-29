@@ -122,9 +122,19 @@ view: store_sales {
     sql: Current_date;;
   }
   dimension: is_ytd{
-    type: string
-    sql: ${date_dim.d_year} ;;
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year(Current_date)
+      and
+      ${date_dim.d_month} <= month(current_date)
+      and
+      ${date_dim.d_date} <= day(current_date)
+      ;;
   }
+# dimension: isytd{
+#  type: string
+# sql: ${date_dim.d_year} ;;
+#  }
   measure: count {
     type: count
     drill_fields: []
