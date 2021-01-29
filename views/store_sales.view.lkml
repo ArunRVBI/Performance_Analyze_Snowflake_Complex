@@ -138,10 +138,10 @@ view: store_sales {
   }
   measure: ytd_CustCount {
     type:count_distinct
-    sql: ${ss_customer_sk}
+    sql: ${ss_customer_sk} ;;
     filters: {
       field: is_ytd
-      value: “yes”
+      value: "yes"
     }
   }
  dimension: customdate{
