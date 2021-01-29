@@ -124,7 +124,7 @@ view: store_sales {
   dimension: is_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year(current_date)-8
+      ${date_dim.d_year} = year(current_date)-9
       and
       ${date_dim.d_month} <= month(current_date)
       and
