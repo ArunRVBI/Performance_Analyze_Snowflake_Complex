@@ -137,7 +137,7 @@ view: store_sales {
   }
   dimension: customdatess{
     type: string
-    sql: string(${date_dim.d_date},9,2) ;;
+    sql: substring(${date_dim.d_date},9,2) ;;
   }
   dimension: custommonth{
     type: string
