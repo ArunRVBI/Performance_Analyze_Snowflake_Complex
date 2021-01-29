@@ -126,9 +126,9 @@ view: store_sales {
     sql:
       ${date_dim.d_year} = year(current_date)-18
       and
-      ${date_dim.d_month} <= month(current_date)
+      substring(${date_dim.d_month},6,2) <= month(current_date)
       and
-      ${date_dim.d_date} <= day(current_date)
+      substring(${date_dim.d_date},9,2) <= day(current_date)
       ;;
   }
  dimension: customdate{
