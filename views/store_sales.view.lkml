@@ -136,11 +136,65 @@ view: store_sales {
       substring(${date_dim.d_date},9,2) <= day(current_date)
       ;;
   }
+  dimension: is_mtd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year(current_date)-18
+      and
+      substring(${date_dim.d_month},6,2) = month(current_date)
+      and
+      substring(${date_dim.d_date},9,2) <= day(current_date)
+      ;;
+  }
+  dimension: is_sply_ytd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year(current_date)-19
+      and
+      substring(${date_dim.d_month},6,2) <= month(current_date)
+      and
+      substring(${date_dim.d_date},9,2) <= day(current_date)
+      ;;
+  }
+  dimension: is_sply_mtd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year(current_date)-19
+      and
+      substring(${date_dim.d_month},6,2) = month(current_date)
+      and
+      substring(${date_dim.d_date},9,2) <= day(current_date)
+      ;;
+  }
   measure: ytd_CustCount {
     type:count_distinct
     sql: ${ss_customer_sk} ;;
     filters: {
       field: is_ytd
+      value: "yes"
+    }
+  }
+  measure: mtd_CustCount {
+    type:count_distinct
+    sql: ${ss_customer_sk} ;;
+    filters: {
+      field: is_mtd
+      value: "yes"
+    }
+  }
+  measure: sply_ytd_CustCount {
+    type:count_distinct
+    sql: ${ss_customer_sk} ;;
+    filters: {
+      field: is_sply_ytd
+      value: "yes"
+    }
+  }
+  measure: sply_mtd_CustCount {
+    type:count_distinct
+    sql: ${ss_customer_sk} ;;
+    filters: {
+      field: is_sply_mtd
       value: "yes"
     }
   }
