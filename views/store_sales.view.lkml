@@ -124,7 +124,7 @@ view: store_sales {
   dimension: is_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year(current_date)-9
+      ${date_dim.d_year} = year(current_date)-18
       and
       ${date_dim.d_month} <= month(current_date)
       and
@@ -134,6 +134,10 @@ view: store_sales {
  dimension: customdate{
     type: string
     sql: ${date_dim.d_date} ;;
+  }
+  dimension: customdatess{
+    type: string
+    sql: string(${date_dim.d_date},9,2) ;;
   }
   dimension: custommonth{
     type: string
