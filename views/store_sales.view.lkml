@@ -121,6 +121,10 @@ view: store_sales {
     type: string
     sql: Current_date;;
   }
+  dimension: is_ytd{
+    type: string
+    sql: ${date_dim.dyear} ;;
+  }
   measure: count {
     type: count
     drill_fields: []
