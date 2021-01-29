@@ -123,7 +123,7 @@ view: store_sales {
   }
   dimension: is_ytd{
     type: string
-    sql: ${date_dim.dyear} ;;
+    sql: ${date_dim.d_year} ;;
   }
   measure: count {
     type: count
