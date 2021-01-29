@@ -121,6 +121,11 @@ view: store_sales {
     type: string
     sql: Current_date;;
   }
+  measure: ss_customer_sk_distinct {
+    type: count_distinct
+    sql: ${TABLE}."SS_CUSTOMER_SK" ;;
+  }
+
   dimension: is_ytd{
     type: yesno
     sql:
@@ -130,6 +135,14 @@ view: store_sales {
       and
       substring(${date_dim.d_date},9,2) <= day(current_date)
       ;;
+  }
+  measure: ytd_CustCount {
+    type:count_distinct
+    sql: ${ss_customer_sk}
+    filters: {
+      field: is_ytd
+      value: “yes”
+    }
   }
  dimension: customdate{
     type: string
