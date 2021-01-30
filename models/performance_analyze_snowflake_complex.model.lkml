@@ -106,6 +106,12 @@ explore: store_sales {
     relationship: many_to_one
     sql_on: ${store_sales.ss_store_sk} =  ${store.s_store_sk};;
   }
+  join: web_sales {
+    type: full_outer
+    relationship: one_to_many
+    sql_on: ${item.i_item_sk} = ${web_sales.ws_item_sk} ;;
+    required_joins: [item]
+  }
 }
 
 explore: store_sales_bkp {}
