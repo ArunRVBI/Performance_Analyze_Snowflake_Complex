@@ -142,31 +142,31 @@ view: store_sales {
   dimension: is_mtd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year(current_date)-18
+      ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) = month(current_date)
+      substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      substring(${date_dim.d_date},9,2) <= day(current_date)
+      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
       ;;
   }
   dimension: is_sply_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year(current_date)-19
+      ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) <= month(current_date)
+      substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %}e)
       and
-      substring(${date_dim.d_date},9,2) <= day(current_date)
+      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
       ;;
   }
   dimension: is_sply_mtd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year(current_date)-19
+      ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) = month(current_date)
+      substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      substring(${date_dim.d_date},9,2) <= day(current_date)
+      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
       ;;
   }
   measure: ytd_CustCount {
