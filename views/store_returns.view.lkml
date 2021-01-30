@@ -105,9 +105,9 @@ view: store_returns {
   dimension: is_less30{
     type: yesno
     sql:
-      ${date_dim.d_year} >=01-01-2002
+      ${date_dim.d_year} >= to_date('2002-01-01','YYYY-MM-DD')
       and
-      ${date_dim.d_year} <= 01-01-2002 + 30;;
+      ${date_dim.d_year} <= to_date('2002-01-01','YYYY-MM-DD') + 30 ;;
   }
   measure: less30 {
     type:sum
