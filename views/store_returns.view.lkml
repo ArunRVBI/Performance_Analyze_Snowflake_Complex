@@ -102,6 +102,21 @@ view: store_returns {
     sql: ${TABLE}."SR_TICKET_NUMBER" ;;
   }
 
+  dimension: is_less30{
+    type: yesno
+    sql:
+      ${date_dim.d_year} >=01-01-2002
+      and
+      ${date_dim.d_year} <= 01-01-2002 + 30;;
+  }
+  measure: less30 {
+    type:sum
+    sql: ${sr_return_quantity} ;;
+    filters: {
+      field: is_less30
+      value: "yes"
+    }
+  }
   measure: count {
     type: count
     drill_fields: []
