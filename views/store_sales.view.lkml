@@ -152,7 +152,7 @@ view: store_sales {
   dimension: is_sply_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year({% parameter datefilter %})
+      ${date_dim.d_year} = year({% parameter datefilter %})-1
       and
       substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %})
       and
@@ -162,7 +162,7 @@ view: store_sales {
   dimension: is_sply_mtd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year({% parameter datefilter %})
+      ${date_dim.d_year} = year({% parameter datefilter %})-1
       and
       substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
