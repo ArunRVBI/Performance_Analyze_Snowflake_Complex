@@ -154,7 +154,7 @@ view: store_sales {
     sql:
       ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %}e)
+      substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %})
       and
       substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
       ;;
