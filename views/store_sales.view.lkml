@@ -132,11 +132,11 @@ view: store_sales {
   dimension: is_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year(current_date)-18
+      ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) <= month(current_date)
+      substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %})
       and
-      substring(${date_dim.d_date},9,2) <= day(current_date)
+      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
       ;;
   }
   dimension: is_mtd{
@@ -225,6 +225,9 @@ view: store_sales {
     type: string
     primary_key: yes
     sql: ${ss_addr_sk}+${ss_cdemo_sk}+${ss_customer_sk}+${ss_hdemo_sk}+${ss_item_sk}+${ss_promo_sk}+${ss_sold_date_sk}+${ss_sold_time_sk}+${ss_store_sk} ;;
+  }
+  parameter: datefilter {
+    type: date
   }
   measure: count {
     type: count
