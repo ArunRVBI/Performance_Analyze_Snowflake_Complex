@@ -46,9 +46,9 @@ explore: item {
     sql_on: ${item.i_item_sk} = ${web_sales.ws_item_sk} ;;
   }
   join: date_dim {
-    type: full_outer
-    relationship: one_to_many
-    sql_on: ${item.i_rec_start_date} = ${date_dim.d_date_sk} ;;
+    relationship: many_to_one
+    sql_on: ${store_sales.ss_sold_date_sk}  = ${date_dim.d_date_sk} ;;
+    required_joins: [store_sales]
   }
 }
 
