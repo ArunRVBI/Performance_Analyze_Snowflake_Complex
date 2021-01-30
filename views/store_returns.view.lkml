@@ -109,11 +109,59 @@ view: store_returns {
       and
       ${date_dim.d_date} <= to_date('2002-01-01','YYYY-MM-DD') + 30 ;;
   }
-  measure: less30 {
+  measure: 30Days {
     type:sum
     sql: ${sr_return_quantity} ;;
     filters: {
       field: is_less30
+      value: "yes"
+    }
+  }
+
+  dimension: is_less60{
+    type: yesno
+    sql:
+      ${date_dim.d_date} >= to_date('2002-01-01','YYYY-MM-DD')
+      and
+      ${date_dim.d_date} <= to_date('2002-01-01','YYYY-MM-DD') + 60 ;;
+  }
+  measure: 60Days {
+    type:sum
+    sql: ${sr_return_quantity} ;;
+    filters: {
+      field: is_less60
+      value: "yes"
+    }
+  }
+
+  dimension: is_less90{
+    type: yesno
+    sql:
+      ${date_dim.d_date} >= to_date('2002-01-01','YYYY-MM-DD')
+      and
+      ${date_dim.d_date} <= to_date('2002-01-01','YYYY-MM-DD') + 90 ;;
+  }
+  measure: 90Days {
+    type:sum
+    sql: ${sr_return_quantity} ;;
+    filters: {
+      field: is_less90
+      value: "yes"
+    }
+  }
+
+  dimension: is_above90{
+    type: yesno
+    sql:
+      ${date_dim.d_date} >= to_date('2002-01-01','YYYY-MM-DD') + 90
+      and
+      ${date_dim.d_date} <= to_date('2002-01-01','YYYY-MM-DD') + 364 ;;
+  }
+  measure: after90Days {
+    type:sum
+    sql: ${sr_return_quantity} ;;
+    filters: {
+      field: is_above90
       value: "yes"
     }
   }
