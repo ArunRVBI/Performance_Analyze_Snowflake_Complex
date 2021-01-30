@@ -153,7 +153,7 @@ view: store_returns {
   dimension: is_above90{
     type: yesno
     sql:
-      ${date_dim.d_date} >= to_date('2002-01-01','YYYY-MM-DD') + 90
+      ${date_dim.d_date} >= to_date('2002-01-01','YYYY-MM-DD') + 91
       and
       ${date_dim.d_date} <= to_date('2002-01-01','YYYY-MM-DD') + 364 ;;
   }
