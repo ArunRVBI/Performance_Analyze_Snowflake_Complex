@@ -52,7 +52,9 @@ explore: item {
   join:  date_dim{
     type: left_outer
     relationship: many_to_one
-    sql_on: ${store_sales.ss_sold_date_sk} =  ${date_dim.d_date_sk};;
+    sql_on: ${store_sales.ss_sold_date_sk} =  ${date_dim.d_date_sk}
+    or
+    ${web_sales.ws_sold_date_sk} =  ${date_dim.d_date_sk};;
     required_joins: [store_sales,web_sales]
   }
 }
