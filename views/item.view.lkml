@@ -132,7 +132,12 @@ view: item {
     type: number
     sql: ${TABLE}."I_WHOLESALE_COST" ;;
   }
+# Custom fields
 
+dimension: total_sales{
+  type: number
+  sql: ${store_sales.ss_sales_price} + ${web_sales.ws_sales_price} ;;
+}
   measure: count {
     type: count
     drill_fields: [i_item_id, i_product_name]
