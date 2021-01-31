@@ -201,31 +201,12 @@ view: store_sales {
       value: "yes"
     }
   }
- dimension: customdate{
-    type: string
-    sql: ${date_dim.d_date} ;;
-  }
-  dimension: customdatess{
-    type: string
-    sql: substring(${date_dim.d_date},9,2) ;;
-  }
-  dimension: custommonth{
-    type: string
-    sql: ${date_dim.d_month} ;;
-  }
-  dimension: customyear{
-    type: string
-    sql: ${date_dim.d_year} ;;
-  }
-  dimension: customyear_minus{
-    type: string
-    sql: year(current_date)-9;;
-  }
-  dimension: Primary_Key {
-    type: string
-    primary_key: yes
-    sql: ${ss_addr_sk}+${ss_cdemo_sk}+${ss_customer_sk}+${ss_hdemo_sk}+${ss_item_sk}+${ss_promo_sk}+${ss_sold_date_sk}+${ss_sold_time_sk}+${ss_store_sk} ;;
-  }
+
+  #dimension: Primary_Key {
+   # type: string
+  #  primary_key: yes
+  #  sql: ${ss_addr_sk}+${ss_cdemo_sk}+${ss_customer_sk}+${ss_hdemo_sk}+${ss_item_sk}+${ss_promo_sk}+${ss_sold_date_sk}+${ss_sold_time_sk}+${ss_store_sk} ;;
+  #}
   parameter: datefilter {
     type: date
   }
