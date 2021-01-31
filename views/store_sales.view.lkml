@@ -88,8 +88,8 @@ view: store_sales {
     sql: ${TABLE}."SS_QUANTITY" ;;
   }
 
-  dimension: ss_sales_price {
-    type: number
+  measure: ss_sales_price {
+    type: sum
     sql: ${TABLE}."SS_SALES_PRICE" ;;
   }
 

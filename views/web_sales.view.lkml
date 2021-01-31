@@ -108,8 +108,8 @@ view: web_sales {
     sql: ${TABLE}."WS_QUANTITY" ;;
   }
 
-  dimension: ws_sales_price {
-    type: number
+  measure: ws_sales_price {
+    type: sum
     sql: ${TABLE}."WS_SALES_PRICE" ;;
   }
 
