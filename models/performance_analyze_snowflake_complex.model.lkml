@@ -34,7 +34,28 @@ explore: income_band {}
 
 explore: inventory {}
 
-explore: item {}
+explore: item {
+  join: item_join_path {
+    type: cross
+    relationship: one_to_one
+  }
+  join: store_sales {
+    sql_on: ${item_join_path.path} = store_sales
+    and ${item.i_item_sk} = ${store_sales.ss_item_sk};;
+    relationship: one_to_one
+  }
+  join: web_sales {
+    sql_on: ${item_join_path.path} = web_sales
+    and ${item.i_item_sk} = ${web_sales.ws_item_sk};;
+    relationship: one_to_one
+  }
+  join:  date_dim{
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${store_sales.ss_sold_date_sk} =  ${date_dim.d_date_sk};;
+    required_joins: [store_sales]
+  }
+}
 
 explore: promotion {}
 
