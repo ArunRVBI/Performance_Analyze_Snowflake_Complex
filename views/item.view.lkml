@@ -132,12 +132,55 @@ view: item {
     type: number
     sql: ${TABLE}."I_WHOLESALE_COST" ;;
   }
-# Custom fields
 
+# Custom fields
 measure: total_sales{
   type: number
   sql: ${store_sales.ss_sales_price} + ${web_sales.ws_sales_price} ;;
 }
+
+
+  dimension: is_ytd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_month},6,2) <= month({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
+      ;;
+  }
+  dimension: is_mtd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
+      ;;
+  }
+  dimension: is_sply_ytd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
+      and
+      substring(${date_dim.d_month},6,2) <= month({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
+      ;;
+  }
+  dimension: is_sply_mtd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
+      ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [i_item_id, i_product_name]
