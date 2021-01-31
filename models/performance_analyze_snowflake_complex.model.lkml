@@ -53,7 +53,7 @@ explore: item {
     type: left_outer
     relationship: many_to_one
     sql_on: ${store_sales.ss_sold_date_sk} =  ${date_dim.d_date_sk};;
-    required_joins: [store_sales]
+    required_joins: [store_sales,web_sales]
   }
 }
 
