@@ -159,7 +159,7 @@ view: date_dim {
   #Custom Dimention
   dimension: selection {
     type: date
-    sql: {% parameter datefilter %};;
+    sql: ${datefilter};;
   }
 
   measure: count {
