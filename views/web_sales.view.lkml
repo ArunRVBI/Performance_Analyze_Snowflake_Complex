@@ -172,6 +172,65 @@ view: web_sales {
     type: number
     sql: ${TABLE}."WS_WHOLESALE_COST" ;;
   }
+
+  #custom dimentions
+  dimension: is_ytd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
+      and
+      ${date_dim.d_date} <= {% parameter store_sales.datefilter %}
+      ;;
+  }
+  dimension: is_mtd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
+      and
+      ${date_dim.d_date} <= {% parameter store_sales.datefilter %}
+      ;;
+  }
+  dimension: is_sply_ytd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
+      and
+      ${date_dim.d_date}<= TO_DATE({% parameter store_sales.datefilter %})-365
+      ;;
+  }
+  dimension: is_sply_mtd{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
+      and
+      ${date_dim.d_date} <= TO_DATE({% parameter store_sales.datefilter %})-365
+      ;;
+  }
+  measure: ws_sales_price_ytd {
+    type: sum
+    sql: ${TABLE}."WS_SALES_PRICE" ;;
+    filters: [is_ytd: "yes"]
+  }
+  measure: ws_sales_price_mtd {
+    type: sum
+    sql: ${TABLE}."WS_SALES_PRICE" ;;
+    filters: [is_mtd: "yes"]
+  }
+  measure: ws_sales_price_sply_ytd {
+    type: sum
+    sql: ${TABLE}."WS_SALES_PRICE" ;;
+    filters: [is_sply_ytd: "yes"]
+  }
+  measure: ws_sales_price_sply_mtd {
+    type: sum
+    sql: ${TABLE}."WS_SALES_PRICE" ;;
+    filters: [is_sply_mtd: "yes"]
+  }
+
   measure: count {
     type: count
     drill_fields: []
