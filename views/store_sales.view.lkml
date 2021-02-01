@@ -134,7 +134,7 @@ view: store_sales {
     sql:
       ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      (${date_dim.d_date} <= {% parameter datefilter %}
+      ${date_dim.d_date} <= {% parameter datefilter %}
       ;;
   }
   dimension: is_mtd{
@@ -162,7 +162,7 @@ view: store_sales {
       and
       substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      ${date_dim.d_date} <= {% parameter datefilter %}-364
+      ${date_dim.d_date} <= TO_DATE({% parameter datefilter %})-364
       ;;
   }
   measure: ytd_CustCount {
