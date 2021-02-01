@@ -151,9 +151,17 @@ view: date_dim {
     type: number
     sql: ${TABLE}."D_YEAR" ;;
   }
+
+
   parameter: datefilter {
     type: date
   }
+  #Custom Dimention
+  dimension: selection {
+    type: date
+    sql: {% parameter datefilter %};;
+  }
+
   measure: count {
     type: count
     drill_fields: [d_quarter_name, d_day_name]
