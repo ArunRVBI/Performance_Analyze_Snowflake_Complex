@@ -140,46 +140,7 @@ measure: total_sales{
 }
 
 
-  dimension: is_ytd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
-      and
-      substring(${date_dim.d_month},6,2) <= month({% parameter store_sales.datefilter %})
-      and
-      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
-      ;;
-  }
-  dimension: is_mtd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
-      and
-      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
-      and
-      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
-      ;;
-  }
-  dimension: is_sply_ytd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
-      and
-      substring(${date_dim.d_month},6,2) <= month({% parameter store_sales.datefilter %})
-      and
-      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
-      ;;
-  }
-  dimension: is_sply_mtd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
-      and
-      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
-      and
-      substring(${date_dim.d_date},9,2) <= day({% parameter store_sales.datefilter %})
-      ;;
-  }
+
 
   measure: count {
     type: count
