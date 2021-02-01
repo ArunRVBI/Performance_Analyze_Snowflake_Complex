@@ -152,7 +152,7 @@ view: store_sales {
     sql:
       ${date_dim.d_year} = year({% parameter datefilter %})-1
       and
-      ${date_dim.d_date}<= TO_DATE{% parameter datefilter %}-364
+      ${date_dim.d_date}<= TO_DATE({% parameter datefilter %})-364
       ;;
   }
   dimension: is_sply_mtd{
