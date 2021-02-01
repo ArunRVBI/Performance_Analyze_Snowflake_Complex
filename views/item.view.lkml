@@ -142,40 +142,42 @@ measure: total_sales{
   dimension: is_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
+      ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      ${date_dim.d_date} <= {% parameter store_sales.datefilter %}
+      ${date_dim.d_date} <= {% parameter datefilter %}
       ;;
   }
   dimension: is_mtd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})
+      ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
+      substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      ${date_dim.d_date} <= {% parameter store_sales.datefilter %}
+      ${date_dim.d_date} <= {% parameter datefilter %}
       ;;
   }
   dimension: is_sply_ytd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
+      ${date_dim.d_year} = year({% parameter datefilter %})-1
       and
-      ${date_dim.d_date}<= TO_DATE({% parameter store_sales.datefilter %})-365
+      ${date_dim.d_date}<= TO_DATE({% parameter datefilter %})-365
       ;;
   }
   dimension: is_sply_mtd{
     type: yesno
     sql:
-      ${date_dim.d_year} = year({% parameter store_sales.datefilter %})-1
+      ${date_dim.d_year} = year({% parameter datefilter %})-1
       and
-      substring(${date_dim.d_month},6,2) = month({% parameter store_sales.datefilter %})
+      substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      ${date_dim.d_date} <= TO_DATE({% parameter store_sales.datefilter %})-365
+      ${date_dim.d_date} <= TO_DATE({% parameter datefilter %})-365
       ;;
   }
-
+  parameter: datefilter {
+    type: date
+  }
   measure: count {
     type: count
     drill_fields: [i_item_id, i_product_name]
