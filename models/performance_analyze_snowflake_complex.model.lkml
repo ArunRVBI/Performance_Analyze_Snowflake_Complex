@@ -128,7 +128,24 @@ explore: web_returns {}
 
 explore: web_returns_bkp {}
 
-explore: web_sales {}
+explore: web_sales {
+  join:  date_dim{
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${web_sales.ws_sold_date_sk} =  ${date_dim.d_date_sk};;
+  }
+  join:  item{
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${web_sales.ws_item_sk} =  ${item.i_item_sk};;
+  }
+  join: store_sales {
+    type: full_outer
+    relationship: one_to_many
+    sql_on: ${item.i_item_sk} = ${store_sales.ss_item_sk} ;;
+    required_joins: [item]
+  }
+}
 
 explore: web_sales_bkp {}
 
