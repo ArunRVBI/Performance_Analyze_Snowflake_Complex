@@ -151,7 +151,9 @@ view: date_dim {
     type: number
     sql: ${TABLE}."D_YEAR" ;;
   }
-
+  parameter: datefilter {
+    type: date
+  }
   measure: count {
     type: count
     drill_fields: [d_quarter_name, d_day_name]
