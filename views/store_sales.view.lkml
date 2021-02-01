@@ -160,28 +160,7 @@ view: store_sales {
       ${date_dim.d_date} <= TO_DATE({% parameter date_dim.datefilter %})-365
       ;;
   }
-  dimension: currentYear{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})-19
-      ;;
-  }
-  dimension: previousYear{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})-20
-      ;;
-  }
-  measure: currentyear_sales {
-    type: sum
-    sql:  ${TABLE}."SS_SALES_PRICE";;
-    filters: [currentYear: "yes"]
-  }
-  measure: previousyear_sales {
-    type: sum
-    sql:  ${TABLE}."SS_SALES_PRICE";;
-    filters: [previousYear: "yes"]
-  }
+
   measure: ytd_CustCount {
     type:count_distinct
     sql: ${ss_customer_sk} ;;
@@ -233,6 +212,41 @@ view: store_sales {
     type: sum
     sql: ${TABLE}."SS_SALES_PRICE" ;;
     filters: [is_sply_mtd: "yes"]
+  }
+
+  dimension: currentYear{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = 2002
+      ;;
+  }
+  dimension: previousYear{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = 2001
+      ;;
+  }
+  measure: currentyear_sales {
+    type: sum
+    sql:  ${TABLE}."SS_SALES_PRICE";;
+    filters: [currentYear: "yes"]
+  }
+  measure: previousyear_sales {
+    type: sum
+    sql:  ${TABLE}."SS_SALES_PRICE";;
+    filters: [previousYear: "yes"]
+  }
+  measure: sales_ratio {
+    type: number
+    sql: (${currentyear_sales}-${previousyear_sales})/${previousyear_sales} * 100 ;;
+  }
+  dimension: Weekcount {
+    type: number
+    sql: WEEKOFYEAR(to_date(${date_dim.d_date})) ;;
+  }
+  dimension: Weekday {
+    type: number
+    sql: DAYOFWEEK(to_date(${date_dim.d_date})) ;;
   }
 
   measure: count {
