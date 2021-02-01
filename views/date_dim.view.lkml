@@ -159,7 +159,7 @@ view: date_dim {
   #Custom Dimention
   dimension: selection {
     type: string
-    sql: 'Filter affectes Customer, store & web sales and Sales Ratio Tables';;
+    sql: 'Filter affects Customer, store & web sales and Sales Ratio Tables';;
   }
 
   measure: count {
