@@ -172,11 +172,6 @@ view: web_sales {
     type: number
     sql: ${TABLE}."WS_WHOLESALE_COST" ;;
   }
-  #dimension: Primary_key{
-  #  type: string
-  #  primary_key: yes
-  #  sql: ${ws_bill_addr_sk}+${ws_bill_cdemo_sk}+${ws_bill_customer_sk}+${ws_bill_hdemo_sk}+${ws_item_sk}+${ws_promo_sk}+${ws_ship_addr_sk}+${ws_ship_cdemo_sk}+${ws_ship_customer_sk}+${ws_ship_date_sk}+${ws_ship_hdemo_sk}+${ws_ship_mode_sk}+${ws_sold_date_sk}+${ws_sold_time_sk}+${ws_warehouse_sk}+${ws_web_page_sk}+${ws_web_site_sk} ;;
-  #}
   measure: count {
     type: count
     drill_fields: []

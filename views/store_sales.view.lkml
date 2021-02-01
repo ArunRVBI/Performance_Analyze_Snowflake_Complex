@@ -119,11 +119,6 @@ view: store_sales {
   }
 
 #custom dimension
-
-  dimension: Current_Year {
-    type: string
-    sql: Current_date;;
-  }
   measure: ss_customer_sk_distinct {
     type: count_distinct
     sql: ${TABLE}."SS_CUSTOMER_SK" ;;
@@ -197,12 +192,26 @@ view: store_sales {
       value: "yes"
     }
   }
-
-  #dimension: Primary_Key {
-   # type: string
-  #  primary_key: yes
-  #  sql: ${ss_addr_sk}+${ss_cdemo_sk}+${ss_customer_sk}+${ss_hdemo_sk}+${ss_item_sk}+${ss_promo_sk}+${ss_sold_date_sk}+${ss_sold_time_sk}+${ss_store_sk} ;;
-  #}
+  measure: ss_sales_price_ytd {
+    type: sum
+    sql: ${TABLE}."SS_SALES_PRICE" ;;
+    filters: [is_ytd: "yes"]
+  }
+  measure: ss_sales_price_mtd {
+    type: sum
+    sql: ${TABLE}."SS_SALES_PRICE" ;;
+    filters: [is_mtd: "yes"]
+  }
+  measure: ss_sales_price_sply_ytd {
+    type: sum
+    sql: ${TABLE}."SS_SALES_PRICE" ;;
+    filters: [is_sply_ytd: "yes"]
+  }
+  measure: ss_sales_price_sply_mtd {
+    type: sum
+    sql: ${TABLE}."SS_SALES_PRICE" ;;
+    filters: [is_sply_mtd: "yes"]
+  }
   parameter: datefilter {
     type: date
   }
