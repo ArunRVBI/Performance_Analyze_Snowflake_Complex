@@ -134,9 +134,7 @@ view: store_sales {
     sql:
       ${date_dim.d_year} = year({% parameter datefilter %})
       and
-      substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %})
-      and
-      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
+      (${date_dim.d_date} <= {% parameter datefilter %}
       ;;
   }
   dimension: is_mtd{
@@ -146,7 +144,7 @@ view: store_sales {
       and
       substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
+      ${date_dim.d_date} <= {% parameter datefilter %}
       ;;
   }
   dimension: is_sply_ytd{
@@ -154,9 +152,7 @@ view: store_sales {
     sql:
       ${date_dim.d_year} = year({% parameter datefilter %})-1
       and
-      substring(${date_dim.d_month},6,2) <= month({% parameter datefilter %})
-      and
-      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
+      ${date_dim.d_date}<= {% parameter datefilter %}-364
       ;;
   }
   dimension: is_sply_mtd{
@@ -166,7 +162,7 @@ view: store_sales {
       and
       substring(${date_dim.d_month},6,2) = month({% parameter datefilter %})
       and
-      substring(${date_dim.d_date},9,2) <= day({% parameter datefilter %})
+      ${date_dim.d_date} <= {% parameter datefilter %}-364
       ;;
   }
   measure: ytd_CustCount {
