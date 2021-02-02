@@ -231,6 +231,54 @@ view: web_sales {
     filters: [is_sply_mtd: "yes"]
   }
 
+
+  dimension: currentYear{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = 2002
+      ;;
+  }
+  dimension: previousYear{
+    type: yesno
+    sql:
+      ${date_dim.d_year} = 2001
+      ;;
+  }
+  measure: currentyear_sales {
+    type: sum
+    sql:  ${TABLE}."WS_SALES_PRICE";;
+    filters: [currentYear: "yes"]
+  }
+  measure: previousyear_sales {
+    type: sum
+    sql:  ${TABLE}."WS_SALES_PRICE";;
+    filters: [previousYear: "yes"]
+  }
+  measure: sales_ratio {
+    type: number
+    sql: (${currentyear_sales}-${previousyear_sales})/${previousyear_sales} * 100 ;;
+  }
+  dimension: Weekcount {
+    type: number
+    sql: WEEKOFYEAR(to_date(${date_dim.d_date})) ;;
+  }
+  dimension: Weekday {
+    type: number
+    sql: DAYOFWEEK(to_date(${date_dim.d_date})) ;;
+  }
+  dimension: weekdays {
+    type: string
+    sql: CASE
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 0 THEN 'Sunday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 1 THEN 'Monday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 2 THEN 'Tuesday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 3 THEN 'Wednesday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 4 THEN 'Thursday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 5 THEN 'Friday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 6 THEN 'Saturday'
+        ELSE 'null'
+        END ;;
+  }
   measure: count {
     type: count
     drill_fields: []

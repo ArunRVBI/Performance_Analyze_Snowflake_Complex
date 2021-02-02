@@ -248,7 +248,19 @@ view: store_sales {
     type: number
     sql: DAYOFWEEK(to_date(${date_dim.d_date})) ;;
   }
-
+  dimension: weekdays {
+    type: string
+    sql: CASE
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 0 THEN 'Sunday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 1 THEN 'Monday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 2 THEN 'Tuesday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 3 THEN 'Wednesday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 4 THEN 'Thursday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 5 THEN 'Friday'
+        WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 6 THEN 'saturday'
+        ELSE 'null'
+        END ;;
+  }
   measure: count {
     type: count
     drill_fields: []
