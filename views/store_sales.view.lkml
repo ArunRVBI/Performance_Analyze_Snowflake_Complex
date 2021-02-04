@@ -261,6 +261,11 @@ view: store_sales {
         ELSE 'null'
         END ;;
   }
+  measure: ss_salesPrice {
+    type: sum
+    sql: ${TABLE}."SS_SALES_PRICE" ;;
+    filters: [date_dim.d_month : "2003-01"]
+  }
   measure: count {
     type: count
     drill_fields: []
