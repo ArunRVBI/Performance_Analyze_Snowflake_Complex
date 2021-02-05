@@ -261,11 +261,16 @@ view: store_sales {
         ELSE 'null'
         END ;;
   }
-  measure: ss_salesPrice {
-    type: sum
-    sql: ${TABLE}."SS_SALES_PRICE" ;;
-    filters: [date_dim.d_month : "2003-01"]
+  dimension: ss_issalesPriceTop10 {
+    type: yesno
+    sql: ${date_dim.d_month} = substring({% parameter date_dim.datefilter %},1,7);;
   }
+  measure: ss_salesprice {
+    type: sum
+    sql: ${TABLE}."SS_SALES_PRICE";;
+    filters: [ss_issalesPriceTop10: "yes"]
+  }
+
   measure: count {
     type: count
     drill_fields: []
