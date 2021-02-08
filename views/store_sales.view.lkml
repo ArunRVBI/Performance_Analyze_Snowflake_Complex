@@ -217,13 +217,17 @@ view: store_sales {
   dimension: currentYear{
     type: yesno
     sql:
-      ${date_dim.d_year} = 2002
+      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter date_dim.datefilter %})
       ;;
   }
   dimension: previousYear{
     type: yesno
     sql:
-      ${date_dim.d_year} = 2001
+      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})-1
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter date_dim.datefilter %})
       ;;
   }
   measure: currentyear_sales {
