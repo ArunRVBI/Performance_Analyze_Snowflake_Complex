@@ -132,50 +132,6 @@ view: item {
     type: number
     sql: ${TABLE}."I_WHOLESALE_COST" ;;
   }
-
-# Custom fields
-measure: total_sales{
-  type: number
-  sql: ${store_sales.ss_sales_price} + ${web_sales.ws_sales_price} ;;
-}
-
-  dimension: is_ytd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})
-      and
-      ${date_dim.d_date} <= {% parameter date_dim.datefilter %}
-      ;;
-  }
-  dimension: is_mtd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})
-      and
-      substring(${date_dim.d_month},6,2) = month({% parameter date_dim.datefilter %})
-      and
-      ${date_dim.d_date} <= {% parameter date_dim.datefilter %}
-      ;;
-  }
-  dimension: is_sply_ytd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})-1
-      and
-      ${date_dim.d_date}<= TO_DATE({% parameter date_dim.datefilter %})-365
-      ;;
-  }
-  dimension: is_sply_mtd{
-    type: yesno
-    sql:
-      ${date_dim.d_year} = year({% parameter date_dim.datefilter %})-1
-      and
-      substring(${date_dim.d_month},6,2) = month({% parameter date_dim.datefilter %})
-      and
-      ${date_dim.d_date} <= TO_DATE({% parameter date_dim.datefilter %})-365
-      ;;
-  }
-
   measure: count {
     type: count
     drill_fields: [i_item_id, i_product_name]
