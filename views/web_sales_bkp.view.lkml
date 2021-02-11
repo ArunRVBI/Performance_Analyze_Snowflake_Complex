@@ -1,5 +1,5 @@
 view: web_sales_bkp {
-  sql_table_name: "DATA_DEV"."WEB_SALES_BKP"
+  sql_table_name: "DATA"."WEB_SALES_BKP"
     ;;
 
   dimension: ws_bill_addr_sk {

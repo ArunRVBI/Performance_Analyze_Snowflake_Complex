@@ -1,5 +1,5 @@
 view: item {
-  sql_table_name: "DATA_DEV"."ITEM";;
+  sql_table_name: "DATA"."ITEM";;
   drill_fields: [i_item_id]
 
   dimension: i_item_id {

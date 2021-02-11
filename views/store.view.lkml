@@ -1,5 +1,5 @@
 view: store {
-  sql_table_name: "DATA_DEV"."STORE"
+  sql_table_name: "DATA"."STORE"
     ;;
   drill_fields: [s_store_id]
 

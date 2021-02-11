@@ -1,5 +1,5 @@
 view: customer_demographics {
-  sql_table_name: "DATA_DEV"."CUSTOMER_DEMOGRAPHICS"
+  sql_table_name: "DATA"."CUSTOMER_DEMOGRAPHICS"
     ;;
 
   dimension: cd_credit_rating {

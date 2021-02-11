@@ -1,5 +1,5 @@
 view: call_center {
-  sql_table_name: "DATA_DEV"."CALL_CENTER"
+  sql_table_name: "DATA"."CALL_CENTER"
     ;;
   drill_fields: [cc_call_center_id]
 
