@@ -1,5 +1,5 @@
 view: ship_mode {
-  sql_table_name: "DATA"."SHIP_MODE"
+  sql_table_name: "DATA_DEV"."SHIP_MODE"
     ;;
   drill_fields: [sm_ship_mode_id]
 

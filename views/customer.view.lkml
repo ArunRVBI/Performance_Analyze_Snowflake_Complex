@@ -1,5 +1,5 @@
 view: customer {
-  sql_table_name: "DATA"."CUSTOMER"
+  sql_table_name: "DATA_DEV"."CUSTOMER"
     ;;
   drill_fields: [c_customer_id]
 

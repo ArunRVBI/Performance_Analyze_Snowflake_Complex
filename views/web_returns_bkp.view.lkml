@@ -1,5 +1,5 @@
 view: web_returns_bkp {
-  sql_table_name: "DATA"."WEB_RETURNS_BKP"
+  sql_table_name: "DATA_DEV"."WEB_RETURNS_BKP"
     ;;
 
   dimension: wr_account_credit {

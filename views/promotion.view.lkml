@@ -1,5 +1,5 @@
 view: promotion {
-  sql_table_name: "DATA"."PROMOTION"
+  sql_table_name: "DATA_DEV"."PROMOTION"
     ;;
 
   dimension: p_channel_catalog {

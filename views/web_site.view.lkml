@@ -1,5 +1,5 @@
 view: web_site {
-  sql_table_name: "DATA"."WEB_SITE"
+  sql_table_name: "DATA_DEV"."WEB_SITE"
     ;;
   drill_fields: [web_site_id]
 

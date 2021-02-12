@@ -1,5 +1,5 @@
 view: dbgen_version {
-  sql_table_name: "DATA"."DBGEN_VERSION"
+  sql_table_name: "DATA_DEV"."DBGEN_VERSION"
     ;;
 
   dimension: dv_cmdline_args {

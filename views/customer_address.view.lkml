@@ -1,5 +1,5 @@
 view: customer_address {
-  sql_table_name: "DATA"."CUSTOMER_ADDRESS"
+  sql_table_name: "DATA_DEV"."CUSTOMER_ADDRESS"
     ;;
 
   dimension: ca_address_id {

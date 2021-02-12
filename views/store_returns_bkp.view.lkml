@@ -1,5 +1,5 @@
 view: store_returns_bkp {
-  sql_table_name: "DATA"."STORE_RETURNS_BKP"
+  sql_table_name: "DATA_DEV"."STORE_RETURNS_BKP"
     ;;
 
   dimension: sr_addr_sk {

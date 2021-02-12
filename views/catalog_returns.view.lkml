@@ -1,5 +1,5 @@
 view: catalog_returns {
-  sql_table_name: "DATA"."CATALOG_RETURNS"
+  sql_table_name: "DATA_DEV"."CATALOG_RETURNS"
     ;;
 
   dimension: cr_call_center_sk {

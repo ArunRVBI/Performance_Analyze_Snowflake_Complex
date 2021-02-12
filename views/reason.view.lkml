@@ -1,5 +1,5 @@
 view: reason {
-  sql_table_name: "DATA"."REASON"
+  sql_table_name: "DATA_DEV"."REASON"
     ;;
   drill_fields: [r_reason_id]
 

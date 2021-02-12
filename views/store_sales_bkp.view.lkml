@@ -1,5 +1,5 @@
 view: store_sales_bkp {
-  sql_table_name: "DATA"."STORE_SALES_BKP"
+  sql_table_name: "DATA_DEV"."STORE_SALES_BKP"
     ;;
 
   dimension: ss_addr_sk {

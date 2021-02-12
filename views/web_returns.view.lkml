@@ -1,5 +1,5 @@
 view: web_returns {
-  sql_table_name: "DATA"."WEB_RETURNS"
+  sql_table_name: "DATA_DEV"."WEB_RETURNS"
     ;;
 
   dimension: wr_account_credit {

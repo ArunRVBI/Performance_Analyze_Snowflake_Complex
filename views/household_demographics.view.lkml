@@ -1,5 +1,5 @@
 view: household_demographics {
-  sql_table_name: "DATA"."HOUSEHOLD_DEMOGRAPHICS"
+  sql_table_name: "DATA_DEV"."HOUSEHOLD_DEMOGRAPHICS"
     ;;
 
   dimension: hd_buy_potential {

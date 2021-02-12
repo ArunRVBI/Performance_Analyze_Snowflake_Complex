@@ -1,5 +1,5 @@
 view: inventory {
-  sql_table_name: "DATA"."INVENTORY"
+  sql_table_name: "DATA_DEV"."INVENTORY"
     ;;
 
   dimension: inv_date_sk {

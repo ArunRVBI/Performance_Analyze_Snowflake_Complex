@@ -1,5 +1,5 @@
 view: web_page {
-  sql_table_name: "DATA"."WEB_PAGE"
+  sql_table_name: "DATA_DEV"."WEB_PAGE"
     ;;
   drill_fields: [wp_web_page_id]
 
