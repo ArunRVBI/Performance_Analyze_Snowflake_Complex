@@ -1,5 +1,5 @@
 view: income_band {
-  sql_table_name: "DATA_DEV"."INCOME_BAND"
+  sql_table_name: "DATA"."INCOME_BAND"
     ;;
 
   dimension: ib_income_band_sk {
