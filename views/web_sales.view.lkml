@@ -261,6 +261,7 @@ view: web_sales {
   measure: sales_ratio {
     type: number
     sql: (${currentyear_sales}-${previousyear_sales})/${previousyear_sales} * 100 ;;
+    value_format: "0.00"
   }
   dimension: Weekcount {
     type: number
@@ -282,6 +283,62 @@ view: web_sales {
         WHEN DAYOFWEEK(to_date(${date_dim.d_date})) = 6 THEN 'Saturday'
         ELSE 'null'
         END ;;
+  }
+
+#For Charts
+  dimension: dateflag{
+    type: yesno
+    sql:
+     ( ${date_dim.d_year} = year({% parameter date_dim.datefilter %})
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter date_dim.datefilter %})
+      and
+      ${date_dim.d_date} <= {% parameter date_dim.datefilter %}
+      )
+      or
+      ( ${date_dim.d_year} = year({% parameter date_dim.datefilter %})-1
+      and
+      substring(${date_dim.d_month},6,2) = month({% parameter date_dim.datefilter %})
+      and
+      ${date_dim.d_date} <= TO_DATE({% parameter date_dim.datefilter %})-365
+      )
+      ;;
+  }
+
+  measure: currentyear_salesprice {
+    type: sum
+    sql:  ${TABLE}."WS_SALES_PRICE";;
+    filters: [is_mtd: "yes"]
+  }
+  measure: previousyear_salesprice {
+    type: sum
+    sql:  ${TABLE}."WS_SALES_PRICE";;
+    filters: [is_sply_mtd: "yes"]
+  }
+  measure: currentyear_listprice {
+    type: sum
+    sql:  ${TABLE}."WS_LIST_PRICE";;
+    filters: [is_mtd: "yes"]
+  }
+  measure: previousyear_listprice {
+    type: sum
+    sql:  ${TABLE}."WS_LIST_PRICE";;
+    filters: [is_sply_mtd: "yes"]
+  }
+  measure: currentyear_wholesalecost {
+    type: sum
+    sql:  ${TABLE}."WS_WHOLESALE_COST";;
+    filters: [is_mtd: "yes"]
+  }
+  measure: previousyear_wholesalecost {
+    type: sum
+    sql:  ${TABLE}."WS_WHOLESALE_COST";;
+    filters: [is_sply_mtd: "yes"]
+  }
+  measure: filter_dateflag {
+    type: sum
+    sql:  1;;
+    filters: [dateflag: "yes"]
   }
   measure: count {
     type: count
