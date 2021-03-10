@@ -31,7 +31,7 @@ view: item {
   dimension: i_class {
     type: string
     sql: ${TABLE}."I_CLASS" ;;
-    suggest_persist_for: "2 minutes"
+    suggest_persist_for: "10 seconds"
   }
 
   dimension: i_class_id {
